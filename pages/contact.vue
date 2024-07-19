@@ -52,7 +52,7 @@ onMounted(() => {
         <div class="z-2 relative">
 
           <div class="form mt-[15vh] flex flex-col sm:flex-row gap-5 justify-center items-center">
-            <input required v-model="phoneNumber" placeholder="Your phone"
+            <input required @keydown.enter="sendNotification" v-model="phoneNumber" placeholder="Your phone"
               class="w-full rounded-full bg-transparent h-16 ring-1 text-xl ring-white/20 sm:col-span-2 outline-none ps-6" />
             <Button :disabled="btnIsLoading" @click="sendNotification"
               class="w-1/2 group h-16 disabled:cursor-not-allowed  hover:bg-transparent ring-1 ring-white/20 hover:text-white text-xl rounded-full disabled:bg-gray-400 bg-white gap-3 text-main-300"

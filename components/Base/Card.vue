@@ -2,33 +2,33 @@
 import type { WorkProjects } from '~/types';
 import { Skeleton } from "@/components/ui/skeleton"
 
-const emits = defineEmits(['hoverCamp', 'hanldeLoadedImage'])
+const emits = defineEmits(['gettingDataFromCard', 'awayFromCard'])
 
 const props = defineProps<{
   item: WorkProjects
 }>()
 
-const compData = () => {
-  // if (true) return;
-  const currentElement = document.querySelector(`[data-src='${props.item.src}']`) as any
-  const offsetLeft = currentElement.offsetLeft as any
-  const parentOffsetTop = document?.querySelector("#work ul.projects__wrapper")?.offsetTop as any
-  const offsetTop = currentElement.offsetTop - parentOffsetTop
-  currentElement.onmousemove = useDebounceFn(() => {
-    emits('hoverCamp', props.item)
+const gettingDataFromCard = () => {
+  const currentCard = document.querySelector(`[data-src='${props.item.src}']`) as any
+  // first 
+  // currentCard.onmouseleave = useDebounceFn(() => {
+  //   emits('awayFromCard', true)
+  // }, 3000, { maxWait: 4000 })
+  // second
+  currentCard.onmousemove = useDebounceFn(() => {
+    emits('gettingDataFromCard', props.item)
   }, 100, { maxWait: 1000 })
 }
 onMounted(() => {
-  compData()
+  gettingDataFromCard()
 })
-
 
 </script>
 
 <template>
-  <div class="mix card cursor-pointer relative aspect-square" :class="item.type" :data-src="item.src">
+  <div class="mix card bg-gray-100 cursor-pointer relative aspect-square" :class="item.type" :data-src="item.src">
     <a :href="item.link" target="_blank" class="max-w-96 block mx-auto">
-      <div class="img__parent bg-gray-100 p-3">
+      <div class="img__parent p-3">
         <div class="img__wrapper group overflow-hidden">
           <!-- <BaseLazyImage :src="`/work/${item.src}.png`" :title="item.title" /> -->
           <BaseLazyImage :src="`/work/compressed/${item.src}-min.png`" :title="item.title" />
@@ -44,7 +44,7 @@ onMounted(() => {
         </h2>
         <Separator class="my-2" />
         <div class="ms-3 badge-group gap-2 flex items-center">
-          <Badge v-for="badge in item.tags" :class="`bg-${badge.color}-600`">
+          <Badge v-for="badge in item.tags" :style="{ backgroundColor: `${badge.color}` }">
             {{ badge.title }}
           </Badge>
         </div>

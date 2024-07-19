@@ -2,11 +2,10 @@
 const { $gsap } = useNuxtApp() as any;
 const work = ref()
 const { query } = useRoute() as any
-const router = useRouter()
 const animateDevName = async () => {
   await new Promise((resolve: any) => {
     $gsap.from('.dev-name .char', {
-      delay: 0.4,
+      delay: 0.6,
       y: '100%',
       opacity: 0,
       duration: 0.5,
@@ -56,7 +55,7 @@ onMounted(async () => {
   <div data-barba="wrapper">
     <main data-barba="container" data-barba-namespace="home">
       <div
-        class="relative bg-gradient-to-b from-main-300 to-main-300/85 overflow-hidden  px-[2vw] sm:px-[8vw] md:px-[10vw] pt-[30vh] md:pt-[20vh] min-h-screen">
+        class="relative bg-gradient-to-b from-main-300 to-main-300/85 overflow-hidden px-[2vw] sm:px-[8vw] md:px-[10vw] pt-[25vh] sm:pt-[30vh] md:pt-[20vh] min-h-screen">
         <div class="">
           <div class="landing w-full">
             <div class="animation-shapes scale-150  -z-0 pointer-events-none absolute top-0 left-0 h-full w-full">
@@ -103,14 +102,14 @@ onMounted(async () => {
 
               <div class="btn_group w-full max-w-2xl gap-5 grid grid-cols-1 sm:grid-cols-2">
                 <Button
-                  class="w-full text- rounded-full text-md h-16 bg-gradient-to-t from-main-300 to-main-300/90  border-0 ring-1 ring-black/20 font-light hover:text-white"
+                  class="w-full rounded-full text-md h-16 bg-gradient-to-t from-main-300 to-main-300/90  border-0 ring-1 ring-black/20 font-light hover:text-white hover:to-main-300/95"
                   variant="outline" @click="openPDF">
                   <!-- <a href="/MohammedFawzey_CV.pdf" target="_blank"> -->
                   Download CV
                   <!-- </a> -->
                 </Button>
                 <Button @click="scrollToSection"
-                  class="w-full select-none  group h-16 hover:bg-transparent ring-1 ring-main-300 hover:ring-white/20 flex items-center hover:text-white text-md  rounded-full bg-white gap-3 text-black"
+                  class="w-full select-none  group h-16 hover:bg-transparent ring-1 ring-white/20 flex items-center hover:text-white text-md  rounded-full bg-white gap-3 text-black"
                   size="lg">
                   <p class="">
                     WORK

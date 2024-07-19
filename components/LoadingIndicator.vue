@@ -3,14 +3,15 @@
 const router = useRouter()
 import { pageTransitionIn, pageTransitionInBeforeMount } from "~/utils/gsap"
 
-router.beforeEach((to, from, next) => {
- // we can make timeout
- pageTransitionIn()
- setTimeout(() => {
-  next()
- }, 500)
+router.beforeEach(async (to, from, next) => {
+
+ await pageTransitionIn()
+ next()
+
 })
-onMounted(() => {
+onMounted(async () => {
+
+ // await nextTick()
  pageTransitionInBeforeMount()
 })
 </script>

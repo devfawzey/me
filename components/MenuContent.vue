@@ -24,7 +24,7 @@ defineExpose({
 <template>
  <div id="menuWrapper"
   class="menu__wrapper absolute top-0 left-0 w-full h-[1600px] items-center  min-h-xl grid grid-rows-8">
-  <template v-for="item in WORK_PROJECTS">
+  <template v-for="item in  WORK_PROJECTS ">
    <div :data-menu="item.src"
     class="relative w-full flex flex-col items-center justify-center gap-16  box h-[200px] px-2 py-2"
     v-if="item.show != false">
@@ -33,7 +33,7 @@ defineExpose({
      {{ item.title }}
     </Badge>
     <div class="badge-group gap-2 flex justify-center items-center flex-wrap">
-     <Badge v-for="badge in item.tags" :class="badge.color">
+     <Badge v-for="badge in  item.tags " :style="{ backgroundColor: `${badge.color}`}">
       {{ badge.title }}
       <!-- {{ badge.color }} -->
      </Badge>

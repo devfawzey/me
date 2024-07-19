@@ -2,12 +2,14 @@
 
 import { WORK_PROJECTS } from "~/utils"
 
-const { $gsap, $mixitup } = useNuxtApp() as any
+const { $gsap } = useNuxtApp() as any
+const gsap = $gsap
 const containerWrapper = ref(null)
 const { isOutside, elementX, elementY } = useMouseInElement(containerWrapper)
 const menu = ref()
 const menuWidth = 200
 const menuContent = ref(null) as any
+const isGettingDatafromChild = ref(false)
 
 const activeTab = ref<'all' | 'design' | 'ecommerce'>('all')
 const tabs: ('all' | 'design' | 'ecommerce')[] = ['all', 'design', 'ecommerce'
@@ -26,42 +28,53 @@ const animateActiveTab = (activeTabValue: string = activeTab.value) => {
   // animate
   const tl = $gsap.timeline()
   tl.to("span.active__tab", {
-    x: tabOffsetLeft.value, width: tabSize.value, duration: 0.8, ease: "Power4.easeInOut", onStart() {
-      filterByCategory(activeTabValue)
-    }
+    x: tabOffsetLeft.value, width: tabSize.value, duration: 0.8, ease: "Power4.easeInOut"
   })
+  tl.set('.tabs .tabs__wrapper  .tab__text', { color: 'white', duration: 0.1, ease: "Power4.easeInOut" }, "=-0.4")
+  tl.to(`.tabs .tabs__wrapper  .tab__text.${activeTab.value}`, { color: 'black', duration: 0.8, ease: "Power4.easeInOut" }, "=-0.9")
 
 }
-// TODO remove mixitup
-const initMixitup = () => {
-  if (!containerWrapper.value) return;
-  mixer.value = $mixitup(containerWrapper.value, {
-    animation: {
-      "duration": 550,
-      "nudge": true,
-      "reverseOut": false,
-      // "effects": "fade translateZ(-100px)"
-      "effects": "translateY(20%) translateZ(-100px)"
-    }
-  });
+const filteredProjects = computed(() => activeTab.value === 'all' ? WORK_PROJECTS.filter(el => el.show !== false) : WORK_PROJECTS.filter(el => el.type === activeTab.value && el.show !== false))
+// scale?
+function onBeforeEnter(el: Element | any) {
+  el.style.scale = 0
+  // el.style.height = 0
 }
-const filterByCategory = (category: string) => {
-  if (category == 'all') {
 
-    mixer.value.filter(`all`)
-  } else {
-
-    mixer.value.filter(`.${category}`)
-  }
+function onEnter(el: Element | any, done: () => void) {
+  gsap.to(el, {
+    scale: 1,
+    // height: '100%',
+    delay: el.dataset.index * 0.15,
+    onComplete: done,
+    ease: "Power4.easeInOut"
+  })
 }
-const getChildData = (data: any) => {
+
+function onLeave(el: Element | any, done: () => void) {
+  gsap.to(el, {
+    scale: 0,
+    // height: 0,
+    delay: el.dataset.index * 0.15,
+    onComplete: done,
+    ease: "Power4.easeInOut"
+  })
+}
+
+
+const gettingDataFromCard = (data: any) => {
+
   menuContent.value.getCurrentMenu(data.src)
 }
 const dim = ref({ x: elementX, y: elementY })
 
+const debounceActiveTab = useDebounceFn(() => animateActiveTab(activeTab.value), 200, { maxWait: 3000 })
 onMounted(() => {
-  window.addEventListener('resize', useDebounceFn(() => animateActiveTab(activeTab.value), 200, { maxWait: 3000 }))
-  initMixitup()
+  window.addEventListener('resize', debounceActiveTab)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', debounceActiveTab)
 })
 
 watch(activeTab, (newValue) => {
@@ -108,28 +121,35 @@ watch(() => dim.value, (newValue) => {
 
 <template>
   <section id="work" class="min-h-screen relative overflow-hidden">
-    <div class="section__wrapper z-3 relative bg-white max-w-7xl mx-auto px-[2vw] sm:px-[8vw] md:px-[10vw] pt-[5vh] md:pt-[5vh]">
-      <BaseSectionHead title="Racent Works" />
-      <!-- tabs -->
-      <div class="tabs  select-none max-w-max mx-auto bg-gray-100 py-2 px-8 sm:px-12 rounded-lg">
-        <ul
-          class="tabs__wrapper relative flex text-center items-center justify-center [&>li]:px-4 [&>li]:sm:px-8 [&>li]:py-4">
-          <template v-for="tab in tabs">
-            <li @click="activeTab = tab" :class="[activeTab === tab ? 'active ' : '', true ? tab : '']"
-              class="tab relative text-sm sm:text-base  text-main-300 z-1 transition-colors capitalize cursor-pointer">{{
-                tab }}</li>
-          </template>
-          <span
-            class="active__tab inline-block absolute top-1/2 left-0 bg-white h-full rounded-full -translate-y-1/2"></span>
-        </ul>
+    <div class="section_head overflow-hidden z-3 relative">
+
+      <div class="section__wrapper  bg-white max-w-7xl mx-auto px-[2vw] sm:px-[8vw] md:px-[10vw] pt-[5vh] md:pt-[5vh]">
+        <BaseSectionHead title="Racent Works" />
+        <!-- tabs -->
+        <div
+          class="tabs  select-none max-w-max mx-auto bg-gradient-to-t from-main-300 to-main-300/90 py-2 px-8 sm:px-12 rounded-lg">
+          <ul
+            class="tabs__wrapper relative flex text-center items-center justify-center [&>li]:px-4 [&>li]:sm:px-8 [&>li]:py-4">
+            <template v-for="tab in tabs">
+              <li @click="activeTab = tab" :class="[activeTab === tab ? 'active ' : '', true ? tab : '']"
+                class="tab tab__text relative text-sm sm:text-base  text-white z-1 transition-colors capitalize cursor-pointer">
+                {{
+                  tab }}</li>
+            </template>
+            <span
+              class="active__tab inline-block absolute top-1/2 left-0 bg-white h-full rounded-full -translate-y-1/2"></span>
+          </ul>
+        </div>
+        <!-- projects -->
       </div>
-      <!-- projects -->
     </div>
-    <div class="mb-10 mt-10 lg:mt-28 projects min-h-[70vh]">
-      <ul ref="containerWrapper"
+
+    <div class="mb-10 mt-10 lg:mt-20 projects min-h-[70vh]">
+      <TransitionGroup ref="containerWrapper" :css="false" @before-enter="onBeforeEnter" @enter="onEnter" @leave="onLeave"
+        tag="ul"
         class="projects__wrapper relative max-w-[1450px] mx-auto min-h-[80vh] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         <!-- MENU -->
-        <div id="menu" ref="menu"
+        <div key="absolute_menu" id="menu" ref="menu"
           class="menu hidden z-2 lg:block overflow-hidden pointer-events-none absolute aspect-square bg-accent rounded-lg top-0 left-0"
           :style="{ width: `${menuWidth}px` }">
           <Button
@@ -139,35 +159,31 @@ watch(() => dim.value, (newValue) => {
             </span>
             <Icon name="radix-icons:arrow-top-right" />
           </Button>
-          <!-- :style="{ width: `${menuWidth}px`, color: 'white', transform: `translate(${dim.theX - menuWidth / 2}px,${dim.theY - menuWidth / 2}px)` }"> -->
-          <!-- :style="{ width: `${menuWidth}px`, color: 'white', transform: `translate(${0}px,${0}px)` }"> -->
           <MenuContent ref="menuContent" />
         </div>
-        <template v-for="item in  WORK_PROJECTS " :key="item">
-          <BaseCard :item="item" v-if="item.show != false" @hover-camp="getChildData" />
-        </template>
-      </ul>
+        <!-- cards -->
+        <BaseCard class="origin-top-left" v-for="(item, index) in  filteredProjects" :key="index" :item="item"
+          :data-index="index" @getting-data-from-card="gettingDataFromCard"
+          @away-from-card="isGettingDatafromChild = false" />
+      </TransitionGroup>
     </div>
   </section>
 </template>
 
 <style>
-.list-move,
-/* apply transition to moving elements */
+/* .list-move,
 .list-enter-active,
 .list-leave-active {
-  transition: all 0.4s ease;
+  transition: all 0.5s ease;
 }
 
 .list-enter-from,
 .list-leave-to {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateX(30px);
 }
 
-/* ensure leaving items are taken out of layout flow so that moving
-   animations can be calculated correctly. */
 .list-leave-active {
   position: absolute;
-}
+} */
 </style>

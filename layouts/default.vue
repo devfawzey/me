@@ -6,7 +6,6 @@ const meInContactPage = computed(() => name === 'contact')
  <!-- <div data-barba="wrapper"> -->
  <!-- <AppHeader /> -->
  <AppLoading />
- <div class="loading-screen-2 bg-[#141517]"></div>
  <AppNavigation />
  <!-- <div class="pt-7"> -->
  <!-- <ClientOnly> -->

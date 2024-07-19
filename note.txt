@@ -1,18 +1,61 @@
-<script src="https://unpkg.com/split-type"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+<script setup lang="ts">
+import type { WorkProjects } from '~/types';
+import { Skeleton } from "@/components/ui/skeleton"
 
-<script>
-let typeSplit = new SplitType('[animate]', {
-  types: 'lines, words, chars',
-  tagName: 'span'
-})
+const emits = defineEmits(['gettingDataFromCard'])
+const currentCard = ref(null) as any
 
-gsap.from('[animate] .char', {
-  y: '100%',
-  opacity: 1,
-  duration: 0.5,
-  ease: 'power1.out',
-  stagger: 0.1,
-  
+const props = defineProps<{
+  item: WorkProjects
+}>()
+
+const gettingDataFromCard = () => {
+  currentCard.value.onmousemove = useDebounceFn(() => {
+    console.log("getting card data")
+    emits('gettingDataFromCard', props.item)
+  }, 100, { maxWait: 1000 })
+}
+onMounted(() => {
+  currentCard.value = document.querySelector(`[data-src='${props.item.src}']`) as any
+  gettingDataFromCard()
+
 })
+onUnMounted
+
 </script>
+
+<template>
+  <div class="mix card bg-gray-100 cursor-pointer relative aspect-square" :class="item.type" :data-src="item.src">
+    <a :href="item.link" target="_blank" class="max-w-96 block mx-auto">
+      <div class="img__parent p-3">
+        <div class="img__wrapper group overflow-hidden">
+          <!-- <BaseLazyImage :src="`/work/${item.src}.png`" :title="item.title" /> -->
+          <BaseLazyImage :src="`/work/compressed/${item.src}-min.png`" :title="item.title" />
+        </div>
+      </div>
+      <div class="lg:hidden">
+        <h2 class="ms-3 flex text-indigo-600 items-center text-lg">
+          <span>
+            {{ item.title }}
+          </span>
+          <Icon name="radix-icons:arrow-top-right" />
+
+        </h2>
+        <Separator class="my-2" />
+        <div class="ms-3 badge-group gap-2 flex items-center">
+          <Badge v-for="badge in item.tags" :style="{ backgroundColor: `${badge.color}` }">
+            {{ badge.title }}
+          </Badge>
+        </div>
+      </div>
+    </a>
+    <div class="loading-state" v-show="false">
+      <Skeleton class="w-full aspect-square" />
+      <Skeleton class="w-1/2 h-2 my-2" />
+      <div class="badge-group flex gap-2">
+        <Skeleton class="w-20 roundd-full h-4 my-2" />
+        <Skeleton class="w-20 roundd-full h-4 my-2" />
+      </div>
+    </div>
+  </div>
+</template>

@@ -6,13 +6,15 @@ const githubBtn = ref(null)
 const navtrigger = ref(null)
 const isNavActive = ref(false);
 const route = useRoute()
-const clickOutsideTarget = ref()
 
+
+const debounceGetGithubTranslateX = useDebounceFn(() => getGithubTranslateX(isNavActive.value), 750, { maxWait: 4000 })
 
 onMounted(() => {
   getGithubTranslateX(isNavActive.value)
-  window.addEventListener('resize', useDebounceFn(() => getGithubTranslateX(isNavActive.value), 750, { maxWait: 4000 }))
+  window.addEventListener('resize', debounceGetGithubTranslateX)
 })
+
 
 watch(isNavActive, async (newValue) => {
   if (newValue) {
@@ -50,7 +52,7 @@ watch(() => route.path, () => {
         <Icon name="mingcute:github-fill" />
       </a>
       <span
-        class="github_content  text-xs absolute left-full duration-700 transition-opacity translate-x-2 opacity-0   text-white">MooFawzey<br />
+        class="github_content  text-xs absolute left-full translate-x-2 opacity-0 text-white/60">MooFawzey<br />
         on
         Github</span>
     </div>

@@ -19,6 +19,14 @@ export default defineNuxtConfig({
     "@nuxt/image"
   ],
 
+  app: {
+    head: {
+      link: [
+        { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" }
+      ]
+    }
+  },
+
   image: {
     provider: "vercel"
   },
