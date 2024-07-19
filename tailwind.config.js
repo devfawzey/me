@@ -5,7 +5,7 @@ module.exports = {
   darkMode: ["class"],
   safelist: ["dark"],
   prefix: "",
-  
+
   theme: {
     container: {
       center: true,
@@ -21,6 +21,11 @@ module.exports = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        main: {
+          100: "#21252be6",
+          200: "282c34e6",
+          300: "#1c1d20"
+        },
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -51,7 +56,7 @@ module.exports = {
         },
       },
       borderRadius: {
-      	xl: "calc(var(--radius) + 4px)",
+        xl: "calc(var(--radius) + 4px)",
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
@@ -80,6 +85,18 @@ module.exports = {
         "collapsible-down": "collapsible-down 0.2s ease-in-out",
         "collapsible-up": "collapsible-up 0.2s ease-in-out",
       },
+      zIndex: {
+        '1': '1',
+        '2': '2',
+        '3': '3',
+        '4': '4',
+      }
+    },
+    fontFamily: {
+      'sans': ["Inter", "sans-serif"],
+      'header': ['Josefin Sans', "sans-serif"],
+      'main': ['DM Sans', "sans-serif"],
+      
     },
   },
   plugins: [animate],
