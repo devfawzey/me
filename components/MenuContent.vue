@@ -1,7 +1,7 @@
 <script setup>
 import { WORK_PROJECTS } from "~/utils";
 const { $gsap } = useNuxtApp()
-const currentSrc = ref(16)
+const currentSrc = ref(1)
 // TODO debounce this
 
 const getCurrentMenu = (SRC) => {

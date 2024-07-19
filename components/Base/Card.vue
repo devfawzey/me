@@ -10,15 +10,12 @@ const props = defineProps<{
 
 const gettingDataFromCard = () => {
   const currentCard = document.querySelector(`[data-src='${props.item.src}']`) as any
-  // first 
-  // currentCard.onmouseleave = useDebounceFn(() => {
-  //   emits('awayFromCard', true)
-  // }, 3000, { maxWait: 4000 })
   // second
   currentCard.onmousemove = useDebounceFn(() => {
     emits('gettingDataFromCard', props.item)
   }, 100, { maxWait: 1000 })
 }
+
 onMounted(() => {
   gettingDataFromCard()
 })
@@ -26,8 +23,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="mix card bg-gray-100 cursor-pointer relative aspect-square" :class="item.type" :data-src="item.src">
-    <a :href="item.link" target="_blank" class="max-w-96 block mx-auto">
+  <div class="mix card  cursor-pointer relative bg-gray-100 max-w-96 block mx-auto" :class="item.type" :data-src="item.src">
+    <a :href="item.link" target="_blank" class="">
       <div class="img__parent p-3">
         <div class="img__wrapper group overflow-hidden">
           <!-- <BaseLazyImage :src="`/work/${item.src}.png`" :title="item.title" /> -->
@@ -43,7 +40,7 @@ onMounted(() => {
 
         </h2>
         <Separator class="my-2" />
-        <div class="ms-3 badge-group gap-2 flex items-center">
+        <div class="ps-3 pb-3 badge-group gap-2 flex items-center">
           <Badge v-for="badge in item.tags" :style="{ backgroundColor: `${badge.color}` }">
             {{ badge.title }}
           </Badge>

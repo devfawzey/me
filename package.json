@@ -34,11 +34,14 @@
     "vue": "latest"
   },
   "devDependencies": {
+    "@iconify-json/devicon": "^1.1.48",
+    "@iconify-json/logos": "^1.1.43",
     "@iconify-json/lucide": "^1.1.200",
     "@iconify-json/mdi": "^1.1.67",
     "@iconify-json/mingcute": "^1.1.18",
     "@iconify-json/ph": "^1.1.13",
     "@iconify-json/radix-icons": "^1.1.14",
+    "@iconify-json/skill-icons": "^1.1.9",
     "@nuxt/image": "latest",
     "@nuxtjs/google-fonts": "^3.2.0",
     "@nuxtjs/tailwindcss": "^6.12.0",

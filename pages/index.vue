@@ -100,7 +100,7 @@ onMounted(async () => {
                 <!-- <h3 class="my-6 text-sm font-semibold text-white/60">Full Stack Developer</h3> -->
               </div>
 
-              <div class="btn_group w-full max-w-2xl gap-5 grid grid-cols-1 sm:grid-cols-2">
+              <div class="btn_group w-full max-w-sm mx-auto sm:ms-0 sm:max-w-2xl gap-5 grid grid-cols-1 sm:grid-cols-2">
                 <Button
                   class="w-full rounded-full text-md h-16 bg-gradient-to-t from-main-300 to-main-300/90  border-0 ring-1 ring-black/20 font-light hover:text-white hover:to-main-300/95"
                   variant="outline" @click="openPDF">

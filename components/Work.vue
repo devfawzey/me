@@ -124,7 +124,7 @@ watch(() => dim.value, (newValue) => {
     <div class="section_head overflow-hidden z-3 relative">
 
       <div class="section__wrapper  bg-white max-w-7xl mx-auto px-[2vw] sm:px-[8vw] md:px-[10vw] pt-[5vh] md:pt-[5vh]">
-        <BaseSectionHead title="Racent Works" />
+        <BaseSectionHead title="Works" class="text-center"/>
         <!-- tabs -->
         <div
           class="tabs  select-none max-w-max mx-auto bg-gradient-to-t from-main-300 to-main-300/90 py-2 px-8 sm:px-12 rounded-lg">
@@ -147,7 +147,7 @@ watch(() => dim.value, (newValue) => {
     <div class="mb-10 mt-10 lg:mt-20 projects min-h-[70vh]">
       <TransitionGroup ref="containerWrapper" :css="false" @before-enter="onBeforeEnter" @enter="onEnter" @leave="onLeave"
         tag="ul"
-        class="projects__wrapper relative max-w-[1450px] mx-auto min-h-[80vh] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        class="projects__wrapper relative max-w-[1450px] gap-y-5 lg:gap-0 mx-auto min-h-[80vh] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         <!-- MENU -->
         <div key="absolute_menu" id="menu" ref="menu"
           class="menu hidden z-2 lg:block overflow-hidden pointer-events-none absolute aspect-square bg-accent rounded-lg top-0 left-0"
