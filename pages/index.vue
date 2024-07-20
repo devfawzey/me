@@ -10,7 +10,6 @@ function openPDF() {
 
 onMounted(async () => {
   await animateDevName($gsap)
-  scrollToSection({ GSAP: $gsap, fn: workSectionComponent.value.animateActiveTab })
 })
 
 </script>
