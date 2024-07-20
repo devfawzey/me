@@ -1,9 +1,10 @@
 <script setup lang="ts">
-
+import theGsap from "gsap";
 import { WORK_PROJECTS } from "~/utils"
 
 const { $gsap } = useNuxtApp() as any
-const gsap = $gsap
+const gsap = $gsap ?? theGsap;
+
 const containerWrapper = ref(null)
 const { isOutside, elementX, elementY } = useMouseInElement(containerWrapper)
 const menu = ref()
@@ -26,7 +27,7 @@ const animateActiveTab = (activeTabValue: string = activeTab.value) => {
   // tabSize
   tabSize.value = theActiveTab?.getBoundingClientRect().width || 100
   // animate
-  const tl = $gsap.timeline()
+  const tl = gsap.timeline()
   tl.to("span.active__tab", {
     x: tabOffsetLeft.value, width: tabSize.value, duration: 0.8, ease: "Power4.easeInOut"
   })
@@ -124,7 +125,7 @@ watch(() => dim.value, (newValue) => {
     <div class="section_head overflow-hidden z-3 relative">
 
       <div class="section__wrapper  bg-white max-w-7xl mx-auto px-[2vw] sm:px-[8vw] md:px-[10vw] pt-[5vh] md:pt-[5vh]">
-        <BaseSectionHead title="Works" class="text-center"/>
+        <BaseSectionHead title="Works" class="text-center" />
         <!-- tabs -->
         <div
           class="tabs  select-none max-w-max mx-auto bg-gradient-to-t from-main-300 to-main-300/90 py-2 px-8 sm:px-12 rounded-lg">

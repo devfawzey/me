@@ -1,9 +1,10 @@
 
 <script setup>
 import { CardDescription } from '~/components/ui/card';
-
-
+import theGsap from "gsap";
 const { $gsap } = useNuxtApp()
+const gsap = $gsap ?? theGsap
+
 
 const stacks = [
  {
@@ -66,16 +67,14 @@ const animateStacks = () => {
  const up = [...stack.value.slice(0, 2), ...stack.value.slice(4, 6)]
  const down = [...stack.value.slice(2, 4), ...stack.value.slice(6, 8)]
 
- const tl = $gsap.timeline()
 
-
- $gsap.from(up, {
+ gsap.from(up, {
   delay: 0.5,
   y: -100, opacity: 0, duration: 1.5,
   ease: "Power4.easeInOut",
   // stagger: 0.05,
  })
- $gsap.from(down, {
+ gsap.from(down, {
   delay: 0.5,
 
   y: 100, opacity: 0, duration: 1.5,

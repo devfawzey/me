@@ -1,18 +1,18 @@
 
 <script setup>
+const { $gsap } = useNuxtApp()
 const router = useRouter()
 import { pageTransitionIn, pageTransitionInBeforeMount } from "~/utils/gsap"
 
 router.beforeEach(async (to, from, next) => {
 
- await pageTransitionIn()
+ await pageTransitionIn($gsap)
  next()
 
 })
 onMounted(async () => {
 
- // await nextTick()
- pageTransitionInBeforeMount()
+ pageTransitionInBeforeMount($gsap)
 })
 </script>
 <template>

@@ -1,8 +1,9 @@
-import gsap from "gsap"
+import theGsap from "gsap"
 
-var tl = gsap.timeline();
 
-async function pageTransitionIn() {
+async function pageTransitionIn(GSAP = theGsap) {
+ const realGsap = theGsap ?? GSAP;
+ var tl = realGsap.timeline();
 
  await new Promise((resolve) => {
   tl.set(".loading-screen", {
@@ -90,10 +91,10 @@ async function pageTransitionIn() {
 
 }
 
-async function pageTransitionInBeforeMount() {
+async function pageTransitionInBeforeMount(GSAP = theGsap) {
+ const realGsap = theGsap ?? GSAP;
+ var tl = realGsap.timeline();
  await new Promise((resolve) => {
-  var tl = gsap.timeline();
-
   tl.set(".loading-screen", {
    top: "0%"
   });
@@ -162,9 +163,17 @@ async function pageTransitionInBeforeMount() {
 
  })
 }
-function contentAnimation() {
- // tl.to('.animate-this', { duration: .8, top: 0, ease: "Power4.easeInOut" })
- tl.to('.animate-this', { duration: .6, top: 0, ease: 'power4.out', })
+function contentAnimation(GSAP = theGsap) {
+ const realGsap = theGsap ?? GSAP;
+ var tl = realGsap.timeline();
+ tl.from('.animate-head.animate-this', {
+  delay: 0.6,
+  y: '-100%',
+  opacity: 0,
+  duration: 0.5,
+  ease: 'power4.out',
+ })
+
 }
 
 export { pageTransitionIn, pageTransitionInBeforeMount, contentAnimation }
