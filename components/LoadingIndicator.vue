@@ -11,7 +11,6 @@ router.beforeEach(async (to, from, next) => {
 
 })
 onMounted(async () => {
-
  pageTransitionInBeforeMount($gsap)
 })
 </script>

@@ -2,7 +2,6 @@
 import { WORK_PROJECTS } from "~/utils";
 const { $gsap } = useNuxtApp()
 const currentSrc = ref(1)
-// TODO debounce this
 
 const getCurrentMenu = (SRC) => {
  if (!SRC) return;
@@ -28,14 +27,12 @@ defineExpose({
    <div :data-menu="item.src"
     class="relative w-full flex flex-col items-center justify-center gap-16  box h-[200px] px-2 py-2"
     v-if="item.show != false">
-    <!-- {{ item.title }} -->
     <Badge variant="outline" class="ring-1 ring-slate-900">
      {{ item.title }}
     </Badge>
     <div class="badge-group gap-2 flex justify-center items-center flex-wrap">
      <Badge v-for="badge in  item.tags " :style="{ backgroundColor: `${badge.color}`}">
       {{ badge.title }}
-      <!-- {{ badge.color }} -->
      </Badge>
     </div>
    </div>

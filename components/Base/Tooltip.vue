@@ -16,7 +16,7 @@ import {
    </TooltipTrigger>
    <TooltipContent>
     <slot name="message" />
-    <!-- <p>Add to library</p> -->
+
    </TooltipContent>
   </Tooltip>
  </TooltipProvider>

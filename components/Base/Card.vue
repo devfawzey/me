@@ -37,7 +37,6 @@ onMounted(() => {
             {{ item.title }}
           </span>
           <Icon name="radix-icons:arrow-top-right" />
-
         </h2>
         <Separator class="my-2" />
         <div class="ps-3 pb-3 badge-group gap-2 flex items-center">

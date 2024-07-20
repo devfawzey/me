@@ -15,7 +15,6 @@ onMounted(() => {
   window.addEventListener('resize', debounceGetGithubTranslateX)
 })
 
-
 watch(isNavActive, async (newValue) => {
   if (newValue) {
     showNav()
@@ -29,10 +28,10 @@ onClickOutside(nav, () => {
   isNavActive.value = false
 }, { ignore: [navtrigger, githubBtn] })
 
-
 watch(() => route.path, () => {
   isNavActive.value = false
 })
+
 </script>
 
 

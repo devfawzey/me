@@ -1,4 +1,4 @@
-import theGsap from "gsap"
+import theGsap from "gsap";
 
 
 async function pageTransitionIn(GSAP = theGsap) {
@@ -163,6 +163,7 @@ async function pageTransitionInBeforeMount(GSAP = theGsap) {
 
  })
 }
+
 function contentAnimation(GSAP = theGsap) {
  const realGsap = theGsap ?? GSAP;
  var tl = realGsap.timeline();
@@ -176,4 +177,70 @@ function contentAnimation(GSAP = theGsap) {
 
 }
 
-export { pageTransitionIn, pageTransitionInBeforeMount, contentAnimation }
+const animateDevName = async (GSAP = theGsap) => {
+ const realGsap = theGsap ?? GSAP;
+
+ await new Promise((resolve: any) => {
+  realGsap.from('.dev-name .char', {
+   delay: 0.6,
+   y: '100%',
+   opacity: 0,
+   duration: 0.5,
+   ease: 'power4.out',
+   stagger: 0.085,
+  }).then(() => {
+   realGsap.to('.dev-jop .jop-line', {
+    y: '0%',
+    opacity: 1,
+    duration: 0.5,
+    ease: 'Power4.easeInOut',
+    stagger: 0.15,
+   }).then(() => {
+    realGsap.to('.work-btn', {
+     x: '0%',
+     opacity: 1,
+     duration: 0.5,
+     ease: 'Power4.easeInOut',
+     // stagger: 0.15,
+    }).then(() => {
+     resolve('')
+    })
+   })
+  })
+ })
+}
+
+const scrollToSection = ({ GSAP, SECTION = '#work', fn }: { GSAP: any, SECTION?: string, fn: () => void }) => {
+ console.log({ SECTION })
+ const realGsap = GSAP ?? theGsap;
+ realGsap.to(window, { duration: 1, scrollTo: { y: SECTION, offsetY: 0 }, ease: "Power4.easeInOut" }).then(() => {
+  // work.value.animateActiveTab()
+  fn()
+ })
+};
+
+const animateStacks = (GSAP = theGsap, stack: any) => {
+ const realGsap = theGsap ?? GSAP;
+ // 0,1(2) || 4,5(6) --- 2,3 || 6,7
+ const up = [...stack.value.slice(0, 2), ...stack.value.slice(4, 6)]
+ const down = [...stack.value.slice(2, 4), ...stack.value.slice(6, 8)]
+
+
+ realGsap.from(up, {
+  delay: 0.5,
+  y: -100, opacity: 0, duration: 1.5,
+  ease: "Power4.easeInOut",
+  // stagger: 0.05,
+ })
+ realGsap.from(down, {
+  delay: 0.5,
+
+  y: 100, opacity: 0, duration: 1.5,
+  ease: "Power4.easeInOut",
+  // stagger: 0.05,
+ })
+
+
+}
+
+export { pageTransitionIn, pageTransitionInBeforeMount, contentAnimation, animateDevName, scrollToSection, animateStacks }

@@ -1,102 +1,25 @@
 
 <script setup>
 import { CardDescription } from '~/components/ui/card';
-import theGsap from "gsap";
+import { animateStacks } from "~/utils/gsap"
+import { STACKS, SERVICES } from "~/utils"
+
 const { $gsap } = useNuxtApp()
-const gsap = $gsap ?? theGsap
-
-
-const stacks = [
- {
-  title: "vue",
-  icon: "logos:vue"
- },
- {
-  title: "node",
-  icon: "logos:nodejs-icon"
- },
- {
-  title: "nuxt",
-  icon: "skill-icons:nuxtjs-dark"
- },
- {
-  title: "vuetify",
-  icon: "logos:vuetifyjs"
- },
- {
-  title: "git",
-  icon: "skill-icons:git"
- },
- {
-  title: "tailwind",
-  icon: "skill-icons:tailwindcss-dark"
- },
- {
-  title: "ts",
-  icon: "devicon:typescript"
- },
- {
-  title: "bootstrap",
-  icon: "devicon:bootstrap-wordmark"
- },
-]
-const services = [
- {
-  title: "product designer",
-  description: "providing quality work to clients and companies",
-  subs: ["web page development", "create efficient web pages"]
- },
- {
-  title: "responsive design",
-  description: "creates dynamic changes for the website",
-  subs: ["Design for thumb", "Make layous adaptive", "consider landscape orientaion",
-   "keep typography responsive"
-  ]
- },
- {
-  title: "clean code",
-  description: "Write well designed, testable, efficient code",
-  subs: ["Reusable Code",]
- }
-]
-
 const stack = ref([])
 
-const animateStacks = () => {
- // 0,1(2) || 4,5(6) --- 2,3 || 6,7
- const up = [...stack.value.slice(0, 2), ...stack.value.slice(4, 6)]
- const down = [...stack.value.slice(2, 4), ...stack.value.slice(6, 8)]
-
-
- gsap.from(up, {
-  delay: 0.5,
-  y: -100, opacity: 0, duration: 1.5,
-  ease: "Power4.easeInOut",
-  // stagger: 0.05,
- })
- gsap.from(down, {
-  delay: 0.5,
-
-  y: 100, opacity: 0, duration: 1.5,
-  ease: "Power4.easeInOut",
-  // stagger: 0.05,
- })
-
-
-}
-
 onMounted(() => {
- animateStacks()
+ animateStacks($gsap, stack)
 })
 
 </script>
+
 <template>
  <main id="about">
   <div class="about__wrapper px-[2vw] sm:px-[8vw] md:px-[10vw] py-[10vh] md:pt-[20vh] ">
    <BaseSectionHead title="Tech Stack" />
    <Separator class="my-16" />
    <div class="tech_stack__wrapper flex items-center gap-5 justify-center flex-wrap">
-    <div ref="stack" class="tech box__icon" :class="item.title" v-for="item in stacks">
+    <div ref="stack" class="tech box__icon" :class="item.title" v-for="item in STACKS">
      <BaseTooltip>
       <template #trigger>
        <div class="icon max-w-28 rounded-xl p-4 ring-1 ring-gray-300">
@@ -115,7 +38,7 @@ onMounted(() => {
    <BaseSectionHead title="I can help you with" class="mb-16 mt-20" />
 
    <div class="flex flex-wrap  justify-center items-center gap-2">
-    <template v-for="(item, ind) in services">
+    <template v-for="(item, ind) in SERVICES">
      <div class="card h-full max-w-[350px] w-[350px] sm:max-w-none">
       <Card
        class="hover:shadow-xl relative  transition-shadow duration-300 min-h-60 h-full hover:mx-shadow border-none ring-1 ring-gray-200"
@@ -146,7 +69,7 @@ onMounted(() => {
  </main>
 </template>
 
-<style>
+<style scoped>
 .mx-shadow {
  box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.08);
 }

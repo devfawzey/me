@@ -15,7 +15,7 @@ const isGettingDatafromChild = ref(false)
 const activeTab = ref<'all' | 'design' | 'ecommerce'>('all')
 const tabs: ('all' | 'design' | 'ecommerce')[] = ['all', 'design', 'ecommerce'
 ]
-const mixer = ref(null) as any
+
 const tabSize = ref<number>(100)
 const tabOffsetLeft = ref<number>(50)
 
@@ -90,11 +90,12 @@ defineProps({
   }
 })
 
+
 defineExpose({
   animateActiveTab
 })
 
-watch(() => dim.value, (newValue) => {
+watch(() => dim.value, (__) => {
   // true
   if (!isOutside.value) {
     $gsap.to('#menu.menu', {

@@ -1,5 +1,4 @@
 <script setup>
-// import "../../public/favicon.ico"
 defineProps({
   src: {
     type: String
@@ -8,7 +7,7 @@ defineProps({
     type: String
   }
 })
-const lazy = "https://picsum.photos/500/300?image=232"
+
 </script>
 <template>
   <nuxt-img :src="src" format="webp" loading="lazy" sizes="400px md:330px" quality="70" :alt="title"

@@ -25,4 +25,58 @@ const SOCIAL_LINKS: List[] = [
 
 const WORK_PROJECTS: WorkProjects[] = workProjectsData
 
-export { NAVIGATION_LINKS, SOCIAL_LINKS, WORK_PROJECTS }
+const STACKS = [
+    {
+        title: "vue",
+        icon: "logos:vue"
+    },
+    {
+        title: "node",
+        icon: "logos:nodejs-icon"
+    },
+    {
+        title: "nuxt",
+        icon: "skill-icons:nuxtjs-dark"
+    },
+    {
+        title: "vuetify",
+        icon: "logos:vuetifyjs"
+    },
+    {
+        title: "git",
+        icon: "skill-icons:git"
+    },
+    {
+        title: "tailwind",
+        icon: "skill-icons:tailwindcss-dark"
+    },
+    {
+        title: "ts",
+        icon: "devicon:typescript"
+    },
+    {
+        title: "bootstrap",
+        icon: "devicon:bootstrap-wordmark"
+    },
+]
+const SERVICES = [
+    {
+        title: "product designer",
+        description: "providing quality work to clients and companies",
+        subs: ["web page development", "create efficient web pages"]
+    },
+    {
+        title: "responsive design",
+        description: "creates dynamic changes for the website",
+        subs: ["Design for thumb", "Make layous adaptive", "consider landscape orientaion",
+            "keep typography responsive"
+        ]
+    },
+    {
+        title: "clean code",
+        description: "Write well designed, testable, efficient code",
+        subs: ["Reusable Code",]
+    }
+]
+
+export { NAVIGATION_LINKS, SOCIAL_LINKS, WORK_PROJECTS, STACKS, SERVICES }

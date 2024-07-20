@@ -37,7 +37,6 @@ onMounted(() => {
 <template>
   <div>
     <main class="bg-main-300">
-      <!-- <div class="main__content bg-[#1C1D20] min-h-screen"></div> -->
       <div
         class="main__content overflow-y-hidden px-[6vw] sm:px-[8vw] md:px-[12vw] pt-[25vh] container min-h-screen text-white">
         <div class="header-text relative">
@@ -45,13 +44,8 @@ onMounted(() => {
             class="text-5xl sm:text-7xl md:text-8xl lg:text-9xl animate-head animate-this relative  uppercase font-semibold text-center tracking-normal">
             Let's work <br /> together
           </h1>
-          <!-- <div
-            class="header-revealer absolute w-full h-full top-0 z-1  before:w-full before:h-[200%] before:bg-main-300 left-0 before:absolute before:left-0 before:top-full ">
-          </div> -->
         </div>
-        <!-- <Separator class="bg-white/20 mt-[24vh] opacity-50" /> -->
         <div class="z-2 relative">
-
           <div class="form mt-[15vh] flex flex-col sm:flex-row gap-5 justify-center items-center">
             <input required @keydown.enter="sendNotification" v-model="phoneNumber" placeholder="Your phone"
               class="w-full rounded-full bg-transparent h-16 ring-1 text-xl ring-white/20 sm:col-span-2 outline-none ps-6" />
@@ -60,7 +54,6 @@ onMounted(() => {
               size="lg">
               <p class="md:text-2xl">
                 Send
-
               </p>
               <span
                 class="w-1/3 group-hover:bg-white inline-block bg-main-300 h-[1.8px] relative before:absolute before:right-0 before:top-1/2 before:h-full before:w-2 group-hover:before:bg-white group-hover:after:bg-white before:rotate-45 before:bg-main-300 before:origin-right after:absolute after:right-0 after:w-2 after:h-full after:bg-main-300 before:transition-colors after:transition-colors transition-colors after:origin-right after:-rotate-45 after:top-1/2 after:-translate-y-1/2 before:-translate-y-1/2">
@@ -83,7 +76,6 @@ onMounted(() => {
             </div>
           </div>
         </div>
-
       </div>
     </main>
   </div>
