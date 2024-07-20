@@ -211,7 +211,6 @@ const animateDevName = async (GSAP = theGsap) => {
 }
 
 const scrollToSection = ({ GSAP, SECTION = '#work', fn }: { GSAP: any, SECTION?: string, fn: () => void }) => {
- console.log({ SECTION })
  const realGsap = GSAP ?? theGsap;
  realGsap.to(window, { duration: 1, scrollTo: { y: SECTION, offsetY: 0 }, ease: "Power4.easeInOut" }).then(() => {
   // work.value.animateActiveTab()
