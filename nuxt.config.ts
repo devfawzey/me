@@ -28,7 +28,7 @@ export default defineNuxtConfig({
   },
 
   image: {
-    provider: "vercel"
+    // provider: "vercel"
   },
 
   css: ["notivue/notification.css", "notivue/animations.css"],
